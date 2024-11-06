@@ -37,6 +37,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="categoryId != null "> and category_id = #{categoryId}</if>
         </where>
     </select>
+
+    <select id="selectBookListAll" parameterType="Book" resultType="com.ruoyi.book.domain.vo.BookVo">
+
+
+        select a.*, b.region_name, c.category_name
+        from tb_book a left join tb_region b on a.region_id = b.id left join tb_category c on a.category_id = c.id
+        <where>
+            <if test="bookName != null  and bookName != ''"> and a.book_name like concat('%', #{bookName}, '%')</if>
+            <if test="author != null  and author != ''"> and a.author = #{author}</if>
+            <if test="publisher != null  and publisher != ''"> and a.publisher = #{publisher}</if>
+            <if test="params.beginPublishDate != null and params.beginPublishDate != '' and params.endPublishDate != null and params.endPublishDate != ''"> and a.publish_date between #{params.beginPublishDate} and #{params.endPublishDate}</if>
+            <if test="regionName != null "> and b.region_name like concat('%',#{regionName},'%') </if>
+            <if test="categoryName != null "> and c.category_name like concat('%',#{categoryName},'%') </if>
+        </where>
+
+    </select>
     
     <select id="selectBookById" parameterType="Long" resultMap="BookResult">
         <include refid="selectBookVo"/>

@@ -2,6 +2,7 @@ package com.ruoyi.book.mapper;
 
 import java.util.List;
 import com.ruoyi.book.domain.Book;
+import com.ruoyi.book.domain.vo.BookVo;
 
 /**
  * 书籍Mapper接口
@@ -26,6 +27,14 @@ public interface BookMapper
      * @return 书籍集合
      */
     public List<Book> selectBookList(Book book);
+
+    /**
+     * 查询书籍列表
+     *
+     * @param book 书籍
+     * @return 书籍集合
+     */
+    public List<BookVo> selectBookListAll(Book book);
 
     /**
      * 新增书籍

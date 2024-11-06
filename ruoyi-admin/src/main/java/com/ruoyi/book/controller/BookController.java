@@ -2,6 +2,8 @@ package com.ruoyi.book.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.book.domain.vo.BookVo;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,10 +41,10 @@ public class BookController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('book:book:list')")
     @GetMapping("/list")
-    public TableDataInfo list(Book book)
+    public TableDataInfo list(BookVo book)
     {
         startPage();
-        List<Book> list = bookService.selectBookList(book);
+        List<BookVo> list = bookService.selectBookList(book);
         return getDataTable(list);
     }
 
@@ -54,8 +56,8 @@ public class BookController extends BaseController
     @PostMapping("/export")
     public void export(HttpServletResponse response, Book book)
     {
-        List<Book> list = bookService.selectBookList(book);
-        ExcelUtil<Book> util = new ExcelUtil<Book>(Book.class);
+        List<BookVo> list = bookService.selectBookList(book);
+        ExcelUtil<BookVo> util = new ExcelUtil<BookVo>(BookVo.class);
         util.exportExcel(response, list, "书籍数据");
     }
 

@@ -1,6 +1,8 @@
 package com.ruoyi.book.service.impl;
 
 import java.util.List;
+
+import com.ruoyi.book.domain.vo.BookVo;
 import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,9 +41,9 @@ public class BookServiceImpl implements IBookService
      * @return 书籍
      */
     @Override
-    public List<Book> selectBookList(Book book)
+    public List<BookVo> selectBookList(Book book)
     {
-        return bookMapper.selectBookList(book);
+        return bookMapper.selectBookListAll(book);
     }
 
     /**
